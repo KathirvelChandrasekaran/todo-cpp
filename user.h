@@ -2,6 +2,7 @@
 #include <iterator>
 #include <list>
 #include <algorithm>
+#include <fstream>
 #include "todo.h"
 using namespace std;
 list<string> user;
@@ -29,11 +30,14 @@ public:
 
 void User::addUser()
 {
+    ofstream out;
+    out.open("todo.dat");
+    out << "kathir" << endl;
+    userCount++;
     User us;
     Todo t;
     cout << "Enter the user name\n";
     cin >> us.u;
-    userCount++;
     us.n = userCount;
     cout << "Added user is " << us.u << endl;
     for (int i = 0; i < us.n; i++)

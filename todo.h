@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iterator>
+#include <fstream>
 #include <list>
 using namespace std;
 list<string> todo;
@@ -27,6 +28,8 @@ public:
 
 void Todo::addtodo()
 {
+    ofstream out;
+    out.open("todo.dat");
     cout << "Enter the number of items\n";
     cin >> n;
     cout << "Enter the todo items\n";
@@ -34,6 +37,7 @@ void Todo::addtodo()
     {
         cin >> s;
         todo.push_back(s);
+        out << s << endl;
         intemCount();
     }
     nestTodo.push_back(todo);
@@ -47,6 +51,7 @@ void Todo::addtodo()
             cout << "Enter the Todo Item\n";
             cin >> s;
             todo.push_front(s);
+            out << s << endl;
         }
         cout << "Non Zero value to add another prior value\n";
         cin >> con;
@@ -68,7 +73,7 @@ void Todo::viewTodo()
     list<list<string> >::iterator nestItr;
     for (nestItr = nestTodo.begin(); nestItr != nestTodo.end(); ++nestItr)
     {
-        cout << "[\n\n"; 
+        cout << "[\n\n";
         list<string>::iterator singleItr;
         list<string> &single_list_pointer = *nestItr;
         int j = 0;
@@ -79,7 +84,7 @@ void Todo::viewTodo()
         {
             cout << "\t\t" << ++j << ")\t" << *singleItr << "\n";
         }
-        cout << "\n\n]\n\n"; 
+        cout << "\n\n]\n\n";
     }
 }
 
